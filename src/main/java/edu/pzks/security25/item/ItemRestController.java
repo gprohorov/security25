@@ -25,7 +25,7 @@ public class ItemRestController {
     public List<Item> getItems() {
         return service.getAll();
     }
-       @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public Item getOneItem(@PathVariable String id) {
         return service.getById(id);
     }
@@ -42,6 +42,21 @@ public class ItemRestController {
     @PutMapping
     public Item update(@RequestBody Item item) {
         return service.update(item);
+    }
+
+    @GetMapping
+    public String helloUser() {
+        return "Hello User!";
+    }
+
+    @GetMapping
+    public String helloAdmin() {
+        return "Hello Admin!";
+    }
+
+    @GetMapping
+    public String helloUnknown() {
+        return "Hello Unknown!";
     }
 
 
