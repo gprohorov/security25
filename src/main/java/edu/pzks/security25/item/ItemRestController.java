@@ -44,17 +44,17 @@ public class ItemRestController {
         return service.update(item);
     }
 
-    @GetMapping
+    @GetMapping("/hello/user")
     public String helloUser() {
         return "Hello User!";
     }
 
-    @GetMapping
+    @GetMapping("hello/admin")
     public String helloAdmin() {
         return "Hello Admin!";
     }
 
-    @GetMapping
+    @GetMapping("hello/unknown")
     public String helloUnknown() {
         return "Hello Unknown!";
     }
