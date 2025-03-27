@@ -11,6 +11,7 @@ package edu.pzks.security25.item;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Getter
@@ -19,7 +20,8 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 @Builder
 @ToString
-public class Item {
+@Document
+public class Item extends AuditMetaData {
 
     @Id
     private String id;

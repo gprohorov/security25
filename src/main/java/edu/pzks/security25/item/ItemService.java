@@ -9,6 +9,7 @@ package edu.pzks.security25.item;
   @since 18.02.25 - 19.47
 */
 
+import edu.pzks.security25.config.SecurityConfig;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository repository;
+    private final SecurityConfig securityConfig;
 
     private List<Item> items;
 
@@ -45,6 +47,7 @@ public class ItemService {
     }
 
     public Item create(Item item) {
+
         return repository.save(item);
     }
 
