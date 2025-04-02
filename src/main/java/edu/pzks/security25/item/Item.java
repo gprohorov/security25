@@ -15,9 +15,6 @@ import org.springframework.data.annotation.Id;
 @Data
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @ToString
 public class Item extends AuditMetaData{
 
@@ -27,6 +24,12 @@ public class Item extends AuditMetaData{
     private String description;
 
     public Item(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Item(String id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }
