@@ -19,7 +19,7 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 @Builder
 @ToString
-public class Item {
+public class Item extends AuditMetaData{
 
     @Id
     private String id;
