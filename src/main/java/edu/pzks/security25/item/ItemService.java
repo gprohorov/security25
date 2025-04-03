@@ -12,6 +12,7 @@ package edu.pzks.security25.item;
 import edu.pzks.security25.config.SecurityConfig;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,7 +37,6 @@ public class ItemService {
     public List<Item> getAll() {
         return repository.findAll();
     }
-
 
     public Item getById(String id) {
         return repository.findById(id).orElse(null);
