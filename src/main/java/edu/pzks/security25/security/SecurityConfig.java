@@ -1,4 +1,4 @@
-package edu.pzks.security25.config;
+package edu.pzks.security25.security;
 
 
 /*
@@ -17,25 +17,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Role;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
-
+    private final JwtFilter jwtAuthFilter;
 
     @Bean
     @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
@@ -48,44 +44,23 @@ public class SecurityConfig {
 
         http.csrf(csrf ->csrf.disable())
                 .authorizeHttpRequests( req ->
-                        req.requestMatchers("/index.html", "/auth/**").permitAll()
-                                .anyRequest()
-                                .authenticated())
+                                req.anyRequest().permitAll()
+//                        req.requestMatchers(
+//                                "/index.html",
+//                                "/auth/**")
+//                                .permitAll()
+//                                .anyRequest()
+//                                .authenticated()
+                )
+
                 .sessionManagement(session
                         -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                // .addFilterBefore()  // TODO
-
+               .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         ;
         return http.build();
     }
 
-
-//
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder().encode("admin"))
-//                .roles("ADMIN")
-//                .build();
-//
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password(passwordEncoder().encode("user"))
-//                .roles("USER")
-//                .build();
-//
-//        UserDetails superadmin = User.builder()
-//                .username("superadmin")
-//                .password(passwordEncoder().encode("superadmin"))
-//                .roles("SUPERADMIN")
-//                .build();
-//
-//
-//        return new InMemoryUserDetailsManager(admin, user, superadmin);
-//    }
 
 
 }

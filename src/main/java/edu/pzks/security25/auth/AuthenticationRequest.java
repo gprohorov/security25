@@ -9,12 +9,20 @@ package edu.pzks.security25.auth;
   @since 15.04.25 - 20.27
 */
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NonNull;
 @Data
 public class AuthenticationRequest {
-    @NonNull
-    private String login;
-    @NonNull
-    private String password;
+
+//    @Email(message = "Email is not well formatted")
+//    @NotEmpty(message = "Email is mandatory")
+//    @NotNull(message = "Email is mandatory")
+    private String email;
+
+
+    private String password;;
 }

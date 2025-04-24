@@ -9,6 +9,11 @@ package edu.pzks.security25.auth;
   @since 15.04.25 - 20.32
 */
 
+import lombok.*;
+
+@Builder
+@Getter
+@Setter
 public class AuthenticationResponse {
     private String token;
 }
