@@ -35,7 +35,6 @@ public class ItemService {
         return repository.findAll();
     }
 
-
     public Item getById(String id) {
         return repository.findById(id).orElse(null);
     }
