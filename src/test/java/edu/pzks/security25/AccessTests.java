@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,7 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@ActiveProfiles("test")
 public class AccessTests {
 
     @Autowired
@@ -60,6 +60,13 @@ public class AccessTests {
     @Test
     @WithMockUser(username = "admin", password = "admin", roles = {"ADMIN"})
     void whenAuthenticatedThenStatusOk() throws Exception {
+        mockMvc.perform(get("/api/v1/items/hello/admin"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithUserDetails("admin")
+    void whenAdminAccessThenStatusOk() throws Exception {
         mockMvc.perform(get("/api/v1/items/hello/admin"))
                 .andExpect(status().isOk());
     }
