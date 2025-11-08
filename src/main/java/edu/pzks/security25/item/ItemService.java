@@ -9,10 +9,9 @@ package edu.pzks.security25.item;
   @since 18.02.25 - 19.47
 */
 
-import edu.pzks.security25.config.SecurityConfig;
+import edu.pzks.security25.security.SecurityConfig;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
