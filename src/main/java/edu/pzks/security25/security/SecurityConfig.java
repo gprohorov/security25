@@ -31,7 +31,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
-    private final JwtFilter jwtAuthFilter;
+
 
     @Bean
     @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
@@ -45,18 +45,12 @@ public class SecurityConfig {
         http.csrf(csrf ->csrf.disable())
                 .authorizeHttpRequests( req ->
                                 req.anyRequest().permitAll()
-//                        req.requestMatchers(
-//                                "/index.html",
-//                                "/auth/**")
-//                                .permitAll()
-//                                .anyRequest()
-//                                .authenticated()
+
                 )
 
                 .sessionManagement(session
                         -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-               .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         ;
         return http.build();
     }
