@@ -45,14 +45,7 @@ public class SecurityConfig {
         http.csrf(csrf ->csrf.disable())
                 .authorizeHttpRequests( req ->
                                 req.anyRequest().permitAll()
-//                        req.requestMatchers(
-//                                "/index.html",
-//                                "/auth/**")
-//                                .permitAll()
-//                                .anyRequest()
-//                                .authenticated()
                 )
-
                 .sessionManagement(session
                         -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
