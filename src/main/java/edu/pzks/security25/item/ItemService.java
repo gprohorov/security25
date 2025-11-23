@@ -25,7 +25,7 @@ public class ItemService {
 
     private List<Item> items;
 
-    @PostConstruct
+  //  @PostConstruct
     void init() {
         items.add(new Item("1", "name1", "description"));
         items.add(new Item("2", "name2", "description2"));

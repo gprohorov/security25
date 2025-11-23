@@ -22,6 +22,8 @@ public class ItemRestController {
 
     private final ItemService service;
 
+
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping
     public List<Item> getItems() {
         return service.getAll();
@@ -32,7 +34,7 @@ public class ItemRestController {
         return service.getById(id);
     }
 
-      @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
          service.deleteById(id);
     }
