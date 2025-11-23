@@ -34,6 +34,7 @@ public class ItemService {
     }
 
     public List<Item> getAll() {
+
         return repository.findAll();
     }
 

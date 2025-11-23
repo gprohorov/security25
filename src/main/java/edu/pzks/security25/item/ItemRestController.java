@@ -26,6 +26,8 @@ public class ItemRestController {
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping
     public List<Item> getItems() {
+
+
         return service.getAll();
     }
 
